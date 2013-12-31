@@ -22,7 +22,6 @@
  * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
-#define _GNU_SOURCE
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
@@ -4315,7 +4314,7 @@ int main(int argc, char **argv)
     char *focuscol;
     char *unfocuscol;
     char *fixedcol;    
-    int scrno;
+    int scrno, i;
     xcb_screen_iterator_t iter;
     
     /* Install signal handlers. */
@@ -4410,7 +4409,7 @@ int main(int argc, char **argv)
 
     /* Find our screen. */
     iter = xcb_setup_roots_iterator(xcb_get_setup(conn));
-    for (int i = 0; i < scrno; ++ i)
+    for (i = 0; i < scrno; ++ i)
     {
         xcb_screen_next(&iter);
     }

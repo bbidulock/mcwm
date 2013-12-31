@@ -158,7 +158,7 @@ int findhidden(void)
 
 void init(void)
 {
-    int scrno;
+    int scrno, i;
     xcb_screen_iterator_t iter;
     
     conn = xcb_connect(NULL, &scrno);
@@ -170,7 +170,7 @@ void init(void)
 
     iter = xcb_setup_roots_iterator(xcb_get_setup(conn));
 
-    for (int i = 0; i < scrno; ++i)
+    for (i = 0; i < scrno; ++i)
     {
         xcb_screen_next(&iter);
     }

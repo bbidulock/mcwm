@@ -1,0 +1,55 @@
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+
+AC_PREREQ([2.69])
+AC_INIT([mcwm], [20130209-2], [http://github.com/bbidulock/mcwm/issues], [mcwm])
+AC_CONFIG_SRCDIR([hidden.c])
+AC_CONFIG_HEADERS([autoconf.h])
+AC_CONFIG_AUX_DIR([scripts])
+AC_USE_SYSTEM_EXTENSIONS
+
+# Initialize Automake
+AM_INIT_AUTOMAKE([foreign dist-bzip2 no-dist-gzip])
+AM_MAINTAINER_MODE
+
+# Checks for programs.
+AC_PROG_CC
+AC_PROG_LN_S
+AC_PROG_MAKE_SET
+AC_PROG_MKDIR_P
+AC_PROG_INSTALL
+AC_ARG_VAR([LD], [Linker loader command])
+
+PKG_PROG_PKG_CONFIG
+
+# Checks for libraries.
+# FIXME: Replace `main' with a function in `-lXau':
+#AC_CHECK_LIB([Xau], [main])
+# FIXME: Replace `main' with a function in `-lXdmcp':
+#AC_CHECK_LIB([Xdmcp], [main])
+# FIXME: Replace `main' with a function in `-lxcb':
+#AC_CHECK_LIB([xcb], [main])
+
+# Checks for header files.
+AC_CHECK_HEADERS([stdint.h stdlib.h string.h unistd.h])
+
+# Checks for typedefs, structures, and compiler characteristics.
+AC_CHECK_HEADER_STDBOOL
+AC_TYPE_INT16_T
+AC_TYPE_INT32_T
+AC_TYPE_PID_T
+AC_TYPE_UINT16_T
+AC_TYPE_UINT32_T
+AC_TYPE_UINT8_T
+
+# Checks for library functions.
+AC_FUNC_FORK
+AC_FUNC_MALLOC
+AC_CHECK_FUNCS([select])
+
+AC_CONFIG_FILES([Makefile])
+
+PKG_CHECK_MODULES([MCWM],[xcb-util xcb-keysyms xcb-randr xcb-icccm xcb-ewmh xcb xdmcp xau])
+AC_OUTPUT
+
+# vim: set ft=config:
