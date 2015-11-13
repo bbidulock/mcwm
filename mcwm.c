@@ -470,7 +470,7 @@ struct modkeycodes getmodkeys(xcb_mod_mask_t modmask)
             
             PDEBUG("Got %d keycodes.\n", keycodes.len);
         }
-    } /* for mask */
+    }
     
     free(reply);
     
@@ -510,7 +510,7 @@ void arrangewindows(void)
     {
         client = item->data;
         fitonscreen(client);
-    } /* for */
+    }
 }
 
 /* Set the EWMH hint that window win belongs on workspace ws. */
@@ -650,7 +650,7 @@ void changeworkspace(uint32_t ws)
              */
             xcb_unmap_window(conn, client->id);
         }
-    } /* for */
+    }
     
     /* Go through list of new ws. Map everything that isn't fixed. */
     for (item = wslist[ws]; item != NULL; item = item->next)
@@ -1276,11 +1276,11 @@ int setupkeys(void)
     /* Now grab the rest of the keys with the MODKEY modifier. */
     for (i = KEY_F; i < KEY_MAX; i ++)
     {
-	if (XK_VoidSymbol == keys[i].keysym)
-	{
-	    keys[i].keycode = 0;
-	    continue;
-	}
+        if (XK_VoidSymbol == keys[i].keysym)
+        {
+            keys[i].keycode = 0;
+            continue;
+        }
 
         keys[i].keycode = keysymtokeycode(keys[i].keysym, keysyms);        
         if (0 == keys[i].keycode)
@@ -1304,7 +1304,7 @@ int setupkeys(void)
         xcb_grab_key(conn, 1, screen->root, MODKEY | SHIFTMOD,
                      keys[i].keycode,
                      XCB_GRAB_MODE_ASYNC, XCB_GRAB_MODE_ASYNC);
-    } /* for */
+    }
 
     /* Need this to take effect NOW! */
     xcb_flush(conn);
@@ -1431,7 +1431,7 @@ int setupscreen(void)
         }
         
         free(attr);
-    } /* for */
+    }
 
     changeworkspace(0);
         
@@ -1673,7 +1673,7 @@ void getoutputs(xcb_randr_output_t *outputs, int len, xcb_timestamp_t timestamp)
 
                         fitonscreen(client);
                     }
-                } /* for */
+                }
                 
                 /* It's not active anymore. Forget about it. */
                 delmonitor(mon);
@@ -1681,7 +1681,7 @@ void getoutputs(xcb_randr_output_t *outputs, int len, xcb_timestamp_t timestamp)
         }
 
         free(output);
-    } /* for */
+    }
 }
 
 void arrbymon(struct monitor *monitor)
@@ -1704,7 +1704,7 @@ void arrbymon(struct monitor *monitor)
         {
             fitonscreen(client);
         }
-    } /* for */
+    }
 
 }
 
@@ -2017,7 +2017,7 @@ void focusnext(bool reverse)
                 client = focuswin->wsitem[curws]->next->data;
             }
         }
-    } /* if NULL focuswin */
+    }
 
     if (NULL != client)
     {
@@ -2466,7 +2466,7 @@ static void snapwindow(struct client *client, int snap_mode)
                 }
             }
         } /* mcwm_resize */
-    } /* for */
+    }
 
     /* monitor border */
     if (snap_mode == MCWM_MOVE) {
@@ -3332,20 +3332,20 @@ void handle_keypress(xcb_key_press_event_t *ev)
             }
             break;
 
-	case KEY_PREVWS:
-	    if (curws > 0)
-	    {
-		changeworkspace(curws - 1);
-	    }
-	    else
-	    {
-		changeworkspace(WORKSPACES - 1);
-	    }
-	    break;
+        case KEY_PREVWS:
+            if (curws > 0)
+            {
+                changeworkspace(curws - 1);
+            }
+            else
+            {
+                changeworkspace(WORKSPACES - 1);
+            }
+            break;
 
-	case KEY_NEXTWS:
-	    changeworkspace((curws + 1) % WORKSPACES);
-	    break;
+        case KEY_NEXTWS:
+            changeworkspace((curws + 1) % WORKSPACES);
+            break;
 
         default:
             /* Ignore other keys. */
@@ -4011,8 +4011,8 @@ void events(void)
                         /* Get out of for... */
                         break;
                     }
-                } /* for keycodes. */
-            } /* if tabbing. */
+                }
+            }
         }
         break;
             
@@ -4077,7 +4077,7 @@ void events(void)
                             }
 
                             movetohead(&wslist[curws], client->wsitem[curws]);
-                        } /* if not tabbing */
+                        }
 
                         setfocus(client);
                     }
@@ -4160,7 +4160,7 @@ void events(void)
                                         wm_state, wm_state, 32, 2, data);
                     xcb_flush(conn);
                 }
-            } /* if */
+            }
         }
         break;
 
@@ -4249,11 +4249,11 @@ void events(void)
                     /* We're finished. Break out of for loop. */
                     break; 
                 }
-            } /* for */
+            }
         } 
         break;
             
-        } /* switch */
+        }
 
         /* Forget about this event. */
         free(ev);
